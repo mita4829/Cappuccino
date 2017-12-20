@@ -49,7 +49,7 @@ const Symbol = [
   //Variable types
   new Token('Type', new RegExp(/^(char|int|float|double|void)\b/)),
   //Operators
-  new Token('Operator', new RegExp(/^(=|==|!=|!|<|<=|>=|>|\+|-|\*|\/|%|&|\^|\(|\)|{|}|;|\[|\]|\|)/)),
+  new Token('Operator', new RegExp(/^(=|==|!=|!|<|<=|>=|>|\+|-|\*|\/|%|&|\^|\(|\)|{|}|;|,|\[|\]|\|)/)),
   //Reserved words
   new Token('Keyword', new RegExp(/^(auto|break|case|continue|default|do|else|enum|extern|for|goto|if|inline|register|restrict|return|sizeof|static|struct|switch|typedef|union|void|volatile|while)/)),
   //Variable
@@ -117,7 +117,7 @@ var lex = function(code){
   return stack;
 }
 
-var lexerCode = function(code){
+var lexerCode = function(code, file){
   //Being lexing the file
   result = lex(code);
   //Catch Error instance if something failed to be lex in the file and call its callback
@@ -143,7 +143,7 @@ var lexerFile = function(file){
     return null;
   }
   //Being lexing the file
-  result = lexerCode(data.toString());
+  result = lexerCode(data.toString(), file);
   return result;
 }
 
